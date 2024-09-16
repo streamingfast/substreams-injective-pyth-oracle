@@ -1,0 +1,14 @@
+type SetOraclePrice @entity {
+    id: ID!
+    price_id: String!
+    ema_price: BigDecimal!
+    ema_conf: BigDecimal!
+    conf: BigDecimal!
+    publish_time: Timestamp!
+    state_price: BigDecimal
+    state_cumulative_price: BigDecimal
+    state_timestamp: Timestamp
+}
+
+
+

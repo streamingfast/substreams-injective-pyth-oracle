@@ -1,0 +1,57 @@
+{
+    "name": "Substreams Starter",
+    "dockerComposeFile": "docker-compose.yml",
+    "workspaceFolder": "/workspace",
+    "service": "main",
+    "containerEnv": {
+        "SUBSTREAMS_INIT_CODEGEN_ENDPOINT": "https://codegen-staging.substreams.dev",
+        "DOCKER_CLI_HINTS": "false",
+        "LOCAL_GRAPH_NODE_HOSTNAME": "graph-node",
+        "PGPASSWORD": "let-me-in",
+        "LOCAL_IPFS_HOSTNAME": "ipfs",
+        "GRAPH_STORE_WRITE_BATCH_SIZE": "0",
+        "WORKSPACE_FOLDER": "${containerWorkspaceFolder}"
+    },
+    "forwardPorts": [
+        "postgres:5432",
+        "ipfs:5001",
+        "pgweb:8081",
+        "graph-node:8080", 
+        "graph-node:8000",
+        "graph-node:8001",
+        "graph-node:8020",
+        "graph-node:8030",
+        "graph-node:8040"
+    ],
+    "portsAttributes": {
+        "1065": {
+            "label": "pprof",
+            "onAutoForward": "silent"
+        },
+        "ipfs:5001": {
+            "label": "ipfs (/webui)",
+            "onAutoForward": "silent"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "1yib.rust-bundle",
+                "rust-lang.rust-analyzer",
+                "vadimcn.vscode-lldb",
+                "ms-azuretools.vscode-docker",
+                "/workspace/.vscode/streamingfast.substreams/substreams-0.0.1.vsix",
+                "bufbuild.vscode-buf"
+            ],
+            "settings": {
+                "workbench.welcomePage.walkthroughs.openOnInstall": false,
+            }
+        }
+    },
+
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    },
+
+    "postCreateCommand": "/workspace/.devcontainer/post-create.sh"
+}
