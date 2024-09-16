@@ -11,8 +11,8 @@ crate-type = ["cdylib"]
 hex-literal = "0.3.4"
 num-bigint = "0.4"
 num-traits = "0.2.15"
-prost = "0.13.1"
-prost-types = "0.13.1"
+prost = "0.11"
+prost-types = "0.11"
 substreams = "^0.5.20"
 cosmrs = { version = "0.16.0", features = ["cosmwasm"] }
 substreams-database-change = "1"
@@ -32,6 +32,3 @@ regex = "1.8"
 lto = true
 opt-level = 's'
 strip = "debuginfo"
-
-[patch.crates-io]
-substreams = { path = "/Users/arnaudberger/StreamingFast/substreams-rs/substreams" }

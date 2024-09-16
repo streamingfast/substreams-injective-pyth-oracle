@@ -117,41 +117,30 @@ export class SetOraclePrice extends Entity {
     this.set("publish_time", Value.fromTimestamp(value));
   }
 
-  get state_price(): BigDecimal | null {
+  get state_price(): BigDecimal {
     let value = this.get("state_price");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toBigDecimal();
     }
   }
 
-  set state_price(value: BigDecimal | null) {
-    if (!value) {
-      this.unset("state_price");
-    } else {
-      this.set("state_price", Value.fromBigDecimal(<BigDecimal>value));
-    }
+  set state_price(value: BigDecimal) {
+    this.set("state_price", Value.fromBigDecimal(value));
   }
 
-  get state_cumulative_price(): BigDecimal | null {
+  get state_cumulative_price(): BigDecimal {
     let value = this.get("state_cumulative_price");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toBigDecimal();
     }
   }
 
-  set state_cumulative_price(value: BigDecimal | null) {
-    if (!value) {
-      this.unset("state_cumulative_price");
-    } else {
-      this.set(
-        "state_cumulative_price",
-        Value.fromBigDecimal(<BigDecimal>value),
-      );
-    }
+  set state_cumulative_price(value: BigDecimal) {
+    this.set("state_cumulative_price", Value.fromBigDecimal(value));
   }
 
   get state_timestamp(): i64 {

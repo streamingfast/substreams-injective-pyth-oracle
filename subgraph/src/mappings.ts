@@ -18,10 +18,15 @@ export function handleTriggers(bytes: Uint8Array): void {
   entity.conf = BigDecimal.fromString(input.conf.toString())
   entity.publish_time = input.publishTime
 
-  if (input.priceState != null) {
-    entity.state_price = BigDecimal.fromString(input.priceState.price.toString())
-    entity.state_cumulative_price = BigDecimal.fromString(input.priceState.cumulativePrice.toString())
-    entity.state_timestamp = input.priceState.timestamp
+  let priceState = input.priceState
+  if (priceState !== null) {
+    entity.state_price = BigDecimal.fromString(priceState.price.toString());
+    entity.state_cumulative_price = BigDecimal.fromString(priceState.cumulativePrice.toString());
+    entity.state_timestamp = priceState.timestamp;
+  } else {
+    entity.state_price = BigDecimal.fromString("0");
+    entity.state_cumulative_price = BigDecimal.fromString("0");
+    entity.state_timestamp = 0;
   }
 
   entity.save();
