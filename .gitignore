@@ -6,3 +6,10 @@ sink-data/
 
 # The spkg packed by the subtreams cli
 *.spkg
+
+.idea/
+
+replay.log
+
+
+

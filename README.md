@@ -1,25 +1,21 @@
-# Injective Minimal
+# Injective Pyth Oracle Prices Substreams modules
 
-## Build your Substreams
+This module is a simple `injective` substreams using [injective-common](https://substreams.dev/streamingfast/injective-common/v0.2.2) modules to filter specific pyth oracle events.  
+
+## Usage
 
 ```bash
 substreams build
-```
-
-## Authenticate
-
-To run your Substreams you will need to [authenticate](https://substreams.streamingfast.io/documentation/consume/authentication) yourself.
-
-```bash
 substreams auth
-```
-
-## Run your Substreams
-
-```bash
 substreams gui
 ```
 
 ## Modules
 
-`map_my_data`: This module will do a simple computation of the number of **transactions** in each block.
+### `injective:filtered_events`
+Filters `EventSetPythPrices` events.
+Default param: `injective:filtered_events: "type:injective.oracle.v1beta1.EventSetPythPrices"`
+
+### `map_set_oracle_prices`
+Listens specific events from the `injective:filtered_events` module, specifically targeting `EventSetPythPrices` events related to a specified pair address (default is INJ/USD pair).
+Default param: `map_set_oracle_prices: "pairID:0x7a5bc1d2b56ad029048cd63964b3ad2776eadf812edc1a43a31406cb54bff592`

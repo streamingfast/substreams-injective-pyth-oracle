@@ -1,41 +1,48 @@
 specVersion: v0.1.0
 package:
   name: pyth_oracle_price
-  version: v0.1.0
+  version: v0.3.0
+  image: ./oracle_pyth.jpeg
 
 imports:
   injective: https://spkg.io/streamingfast/injective-common-v0.2.2.spkg
-
-protobuf:
-  excludePaths:
-    - sf/substreams
-    - google
-    - amino
-    - gogoproto
-    - cosmos/msg/v1
 
 binaries:
   default:
     type: wasm/rust-v1
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
-modules:
-  - name: map_events
-    use: injective:filtered_events
-    initialBlock: 30749339
+protobuf:
+  files:
+    - set_oracle_price.proto
+  importPaths:
+    - ./proto/sf/substreams/injective/oracle/v1
 
-  - name: store_oracle_prices
-    kind: store
-    initialBlock: 30749339
+  excludePaths:
+    - sf/substreams/index
+    - sf/substreams/rpc
+    - sf/substreams/sink
+    - sf/substreams/v1
+    - google
+    - amino
+    - gogoproto
+    - cosmos/msg/v1
+
+modules:
+  - name: map_set_oracle_prices
+    kind: map
+    initialBlock: 3940561
     inputs:
-      - map: map_events
-    output:
-     type: proto:mydata.v1.MyData
-    updatePolicy: set
-    valueType: string
+     - params: string
+     - map: injective:filtered_events
+    output :
+      type: proto:sf.substreams.injective.oracle.v1.SetOraclePrice
 
 params:
-  map_events: type:injective.oracle.v1beta1.EventSetPythPrices
+  map_set_oracle_prices: "pairID:0x7a5bc1d2b56ad029048cd63964b3ad2776eadf812edc1a43a31406cb54bff592" # INJ/USD pair ID
+  injective:filtered_events: "type:injective.oracle.v1beta1.EventSetPythPrices"
 
 network: injective-mainnet
+
+
 
