@@ -1,7 +1,7 @@
 specVersion: v0.1.0
 package:
   name: pyth_oracle_price
-  version: v0.3.0
+  version: v0.4.0
   image: ./oracle_pyth.jpeg
 
 imports:
@@ -38,11 +38,19 @@ modules:
     output :
       type: proto:sf.substreams.injective.oracle.v1.SetOraclePrice
 
+  - name : store_set_oracle_prices
+    kind: store
+    inputs:
+      - map: map_set_oracle_prices
+    updatePolicy: set
+    valueType: proto:sf.substreams.injective.oracle.v1.SetOraclePrice
+
 params:
   map_set_oracle_prices: "pairID:0x7a5bc1d2b56ad029048cd63964b3ad2776eadf812edc1a43a31406cb54bff592" # INJ/USD pair ID
   injective:filtered_events: "type:injective.oracle.v1beta1.EventSetPythPrices"
 
-network: injective
+
+network: injective-mainnet
 
 
 

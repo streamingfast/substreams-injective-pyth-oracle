@@ -8,6 +8,10 @@ use num_traits::Float;
 use pb::sf::substreams::injective::oracle::v1::{SetOraclePrice, PriceState};
 use substreams::errors::Error;
 use substreams::log;
+use substreams::prelude::*;
+use substreams::store::{
+    StoreSetProto,
+};
 
 use types::JSONOraclePrice;
 
@@ -42,4 +46,10 @@ pub fn map_set_oracle_prices(params: String, events: EventList) -> Result<SetOra
     });
 
     Ok(set_event)
+}
+
+#[substreams::handlers::store]
+pub fn store_set_oracle_prices(event: SetOraclePrice, store: StoreSetProto<SetOraclePrice>) {
+    let price_id = event.price_id.clone();
+    store.set(0, format!("oracle_price:{price_id}"), &event);
 }

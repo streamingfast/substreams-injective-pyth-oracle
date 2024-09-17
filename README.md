@@ -19,3 +19,6 @@ Default param: `injective:filtered_events: "type:injective.oracle.v1beta1.EventS
 ### `map_set_oracle_prices`
 Listens specific events from the `injective:filtered_events` module, specifically targeting `EventSetPythPrices` events related to a specified pair address (default is INJ/USD pair).
 Default param: `map_set_oracle_prices: "pairID:0x7a5bc1d2b56ad029048cd63964b3ad2776eadf812edc1a43a31406cb54bff592`
+
+### `store_set_oracle_prices`
+Stores the `EventSetPythPrices` events from the `map_set_oracle_prices`.

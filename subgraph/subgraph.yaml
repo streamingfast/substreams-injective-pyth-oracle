@@ -7,7 +7,7 @@ schema:
 dataSources:
   - kind: substreams
     name: pyth_oracle_price
-    network: injective
+    network: injective-mainnet
     source:
       package:
         moduleName: map_set_oracle_prices
